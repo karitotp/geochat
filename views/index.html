@@ -20,9 +20,7 @@
     <h4><ul id="messages"></ul></h4>
 
 
-    <form action="">
-      <input id="m"/>
-    </form>
+    <form action=""> <input id="m"/> </form>
 
    <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -31,15 +29,7 @@
 <script>
 
   var socket = io(); // Inicializamos socketIO en el cliente
- 
- 
 
- /**
-     * Listener para el evento 'chat message'
-     *   Notese que es el mismo evento que se envia 
-     *   desde el servidor.
-     * Agregamos el mensage entrante a la lista.
-     */
   socket.on('chat message', function(msg){
     $('#messages').append($('<li>').text(msg));
   });
@@ -49,11 +39,6 @@
     $('#m').val('');
     return false;
   });
-/**
-     * Emitimos un evento de tipo 'chat message' cada vez
-     * que se presiona 'Enter' en el textarea y enviamos
-     * su contenido como mensaje.
-     */
 
   $('#m').keyup(function (evt) {
       if (evt.keyCode === 13) {
