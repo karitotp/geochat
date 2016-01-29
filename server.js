@@ -1,17 +1,20 @@
 /* Librerias necesarias para la aplicación */
-var app  = require('express')();
+var express = require('express');
+var app = express();
+var path = require('path');
+
+
 var http = require('http').Server(app);
 var io   = require('socket.io')(http);
 
 
-/** *** *** ***
- *  Configuramos el sistema de ruteo para las peticiones web
- *  de manera que sin importar la ruta que el usuario solicite
- *  siempre lo direccionaremos al html del sistema de chat.
- */
-app.get('*', function(req, res) {
-  res.sendFile( __dirname + '/views/index.html');
-});
+//app.use(express.static(__dirname)); // Current directory is root
+app.use(express.static(path.join(__dirname, 'views'))); 
+
+
+//app.get('*', function(req, res) {
+ // res.sendFile( __dirname + '/views');
+//});
 
 
 /** *** *** ***
@@ -49,5 +52,5 @@ io.on('connection', function(socket) {
  * Iniciamos la aplicación en el puerto 3000
  */
 http.listen(8080, function() {
-  console.log('listening on *:8080');
+  console.log('listening on :8080');
 });
